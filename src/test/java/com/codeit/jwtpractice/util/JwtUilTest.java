@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class JwtUilTest {
 
     @Autowired
-    private JwtUil jwtUtil;
+    private JwtUtil jwtUtil;
     @Autowired
     private JwtProperties jwtProperties;
 

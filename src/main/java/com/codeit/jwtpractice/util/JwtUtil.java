@@ -18,7 +18,7 @@ import java.util.Date;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class JwtUil {
+public class JwtUtil {
 
     private final JwtProperties jwtProperties;
 
@@ -55,7 +55,7 @@ public class JwtUil {
                 .compact(); // 최종적으로 모든 정보를 압축하여 JWT 문자열을 생성
     }
 
-    // Access Token 생성
+    // Refresh Token 생성
     public String generateRefreshToken(User user) {
 
         // Jwts.builder가 Date 객체로 날짜로 세팅하기 때문에 부득이하게 Date로 생성
@@ -73,7 +73,7 @@ public class JwtUil {
 
                 // private claim: 인증 과정에서 필요한 사적 정보
                 .claim("user_id", user.getId())
-                .claim("token_type", "access")
+                .claim("token_type", "refresh")
                 .signWith(getSecretKey())
 
                 .compact(); // 최종적으로 모든 정보를 압축하여 JWT 문자열을 생성
@@ -134,7 +134,7 @@ public class JwtUil {
     }
 
     // accessToken 만료시간 조회
-    public Long getAccessTokenExpirationInSeconds(String token) {
+    public Long getAccessTokenExpirationInSeconds() {
         return jwtProperties.getAccessTokenExpiration() / 1000;
     }
 
